@@ -1,0 +1,7 @@
+fastapi
+celery
+redis
+python-multipart
+uvicorn
+kafka-python
+moviepy
