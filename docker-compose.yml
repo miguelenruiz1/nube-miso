@@ -29,10 +29,14 @@ services:
       - redis
 
   worker:
-    build: ./worker
+    build:
+      context: . # Cambia el contexto al directorio raíz
+      dockerfile: worker/Dockerfile # Usa el Dockerfile en la carpeta worker
+    command: celery -A app.tasks worker --loglevel=info
     volumes:
       - ./videos:/app/videos
       - ./processed_audios:/app/processed_audios
+      - ./backend/app:/app/app # Esto proporciona acceso a los archivos del backend
     depends_on:
       - redis
       - kafka
